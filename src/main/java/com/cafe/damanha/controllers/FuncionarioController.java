@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cafe.damanha.models.Funcionario;
 import com.cafe.damanha.repository.FuncionarioRepository;
 
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/cafe")
 public class FuncionarioController {
@@ -69,14 +69,15 @@ public class FuncionarioController {
 		funcRepository.delete(funcionario);
 	}
 
-	@DeleteMapping("/funcionario/apagar")
-	public void deleteCafeAll(@RequestBody @Valid Funcionario funcionario) {
-
-		funcRepository.deletartudo();
-	}
-
 	@PutMapping("/funcionario")
 	public Funcionario atualizarFuncionario(@RequestBody @Valid Funcionario funcionario) {
+
+		String novoNome = funcionario.getNome();
+		String novoCPF = funcionario.getCpf();
+		String novoITEM = funcionario.getItemcafe();
+		if (novoNome == null && novoCPF == null && novoITEM == null) {
+			return null;
+		}
 
 		return funcRepository.save(funcionario);
 	}
